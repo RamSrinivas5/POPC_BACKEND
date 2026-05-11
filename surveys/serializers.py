@@ -61,9 +61,9 @@ class SurveySerializer(serializers.ModelSerializer):
 
         # ---------- Determine Risk Level ----------
         total = survey.total_score
-        if total <= 20:
+        if total <= 30:
             survey.risk_level = "Low"
-        elif total <= 40:
+        elif total <= 45:
             survey.risk_level = "Moderate"
         elif total <= 60:
             survey.risk_level = "High"
