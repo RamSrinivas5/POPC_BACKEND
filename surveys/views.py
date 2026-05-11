@@ -185,10 +185,6 @@ class DashboardView(generics.GenericAPIView):
 
         total_for_pie = low_risk_count + moderate_risk_count + high_risk_pie_count or 1
 
-        stable_pct = round((low_risk_count / total_for_pie) * 100, 2)
-        moderate_pct = round((moderate_risk_count / total_for_pie) * 100, 2)
-        high_risk_pct = round((high_risk_pie_count / total_for_pie) * 100, 2)
-
         data = {
             # dashboard counts
             "total_surveyed": surveyed_count,
@@ -196,10 +192,10 @@ class DashboardView(generics.GenericAPIView):
             "high_risk_patients": high_risk_patients,
             "total_patients": total_patients,
 
-            # pie chart percentages
-            "stable": stable_pct,        # Mapped to Low Risk in iOS app
-            "pending": moderate_pct,     # Mapped to Moderate in iOS app
-            "high_risk": high_risk_pct,  # Mapped to High Risk in iOS app
+            # pie chart counts
+            "stable": low_risk_count,        # Mapped to Low Risk in iOS app
+            "pending": moderate_risk_count,  # Mapped to Moderate in iOS app
+            "high_risk": high_risk_pie_count,# Mapped to High Risk in iOS app
         }
 
         serializer = self.get_serializer(data)
